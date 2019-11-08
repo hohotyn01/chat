@@ -1,38 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container heights-vh">
+      <enter class="mb-5"></enter>
+      <registration></registration>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-import Echo from "laravel-echo";
+  import Echo from "laravel-echo";
+  import Enter from './components/Enter.vue';
+  import Registration from './components/Registration.vue';
 
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  },
-  created() {
-    window.io = require('socket.io-client');
-
-    window.Echo = new Echo({
-      broadcaster: 'socket.io',
-      host: window.location.hostname + ':6001'
-    });
+  export default {
+    name: 'app',
+    components: {
+      Registration,
+      Enter,
+    },
+    created() {
+      window.io = require('socket.io-client');
+      window.Echo = new Echo({
+        broadcaster: 'socket.io',
+        host: window.location.hostname + ':6001'
+      });
+    }
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+  .heights {
+    height: 100%
+  }
+
+  .heights-vh {
+    height: 100vh
+  }
+
 </style>
