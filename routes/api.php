@@ -19,8 +19,6 @@ Route::get('open', 'DataController@open');
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');
     Route::get('closed', 'DataController@closed');
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::post('sendMessage', 'SendMessageController@message');
+    Route::post('logout', 'UserController@logout');
 });

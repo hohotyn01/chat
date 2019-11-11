@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="container heights-vh">
+      <chat class="mb-5"></chat>
       <enter class="mb-5"></enter>
       <registration></registration>
     </div>
@@ -9,6 +10,7 @@
 
 <script>
   import Echo from "laravel-echo";
+  import Chat from './components/Chat.vue';
   import Enter from './components/Enter.vue';
   import Registration from './components/Registration.vue';
 
@@ -16,8 +18,9 @@
   export default {
     name: 'app',
     components: {
-      Registration,
+      Chat,
       Enter,
+      Registration,
     },
     created() {
       window.io = require('socket.io-client');

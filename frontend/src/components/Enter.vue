@@ -4,6 +4,9 @@
             Login
         </div>
         <div class="card-body">
+            <div class="alert alert-danger" v-if="error_status">
+                {{error_message}}
+            </div>
             <form>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
@@ -60,8 +63,13 @@
         name: "Enter",
         data() {
             return {
+                // Credentials
                 email: '',
                 password: '',
+
+                // Event handler
+                error_status: false,
+                error_message: '',
             }
         },
         methods: {
@@ -72,10 +80,15 @@
                         password: this.password
                     })
                     .then(response => {
-                        console.log(response)
+                        this.error_status = false;
+                        this.error_message = '';
+                        document.cookie="token = " + response.data.token;
                     })
                     .catch(error => {
-                        console.log("error: ", error.response)
+                        this.error_status = true;
+                        this.error_message = error.response.statusText;
+                        console.log(error.response);
+                        console.log(error.response.statusText);
                     })
             }
         }

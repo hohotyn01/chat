@@ -5,13 +5,20 @@
         </div>
         <div class="card-body">
             <form>
+                <div class="alert alert-success" v-if="success_status">
+                    {{success_message}}
+                </div>
+                <div class="alert alert-danger" v-if="error_status">
+                    {{error_message}}
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name</label>
                         <input
                                 type="text"
                                 class="form-control"
-                                name="name" v-model="name"
+                                name="name"
+                                v-model="name"
                                 id="name"
                                 placeholder="Name"
                         >
@@ -84,30 +91,41 @@
 <script>
     import axios from 'axios';
 
-    export default {
+export default {
         name: "Registration",
         data() {
             return {
+                // Credentials
                 name: '',
                 email: '',
                 password: '',
                 confirm: '',
+
+                // Event handler
+                success_status: false,
+                success_message: '',
+                error_status: false,
+                error_message: [],
             }
         },
         methods: {
             sendValue() {
                 axios
                     .post('api/register', {
+                        // Credentials
                         name: this.name,
                         email: this.email,
                         password: this.password,
                         password_confirmation: this.confirm,
                     })
                     .then(response => {
-                        console.log(response)
+                        this.success_status = true;
+                        this.success_message = response.statusText;
                     })
                     .catch(error => {
-                        console.log("error: ", error.response)
+                        this.error_status = true;
+                        this.error_message = error.response.data;
+                        console.log(error.response.data)
                     })
             }
         }
