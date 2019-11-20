@@ -12,7 +12,7 @@
                     readonly=""
                     v-model="message"
             ></textarea>
-            <hr>run
+            <hr>
             <input
                     type="text"
                     class="form-control"
@@ -39,10 +39,11 @@
             }
         },
         mounted() {
-            window.Echo.channel('laravel_database_room')
-                .listen('Chat', (e) => {
-                    this.message.push(e.message);
-                });
+            console.log(window.Echo)
+            // window.Echo.private('room')
+            //     .listen('Chat', (e) => {
+            //         this.message.push(e.message);
+            //     });
         },
         methods: {
             sendMessage() {

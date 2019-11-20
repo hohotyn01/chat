@@ -1,15 +1,12 @@
 {
-	"authHost": "http://localhost",
+	"authHost": "http://chat.loc",
 	"authEndpoint": "/broadcasting/auth",
-	"clients": [
-		{
-			"appId": "86181959b4ba82fa",
-			"key": "6d6064ecdec6473e266e1ff66f961411"
-		}
-	],
 	"database": "redis",
 	"databaseConfig": {
-		"redis": {},
+		"redis": {
+			"host": "127.0.0.1",
+			"port": 6379
+		},
 		"sqlite": {
 			"databasePath": "/database/laravel-echo-server.sqlite"
 		}
